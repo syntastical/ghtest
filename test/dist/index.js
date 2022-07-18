@@ -21,7 +21,7 @@ console.log((0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("GITHUB_TOKE
 const octokit = (0,_actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit)((0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("GITHUB_TOKEN"));
 const releases = await octokit.rest.repos.listReleases({owner, repo});
 
-for(const release of releases) {
+for(const release of releases.data) {
   // if the release version isn't currently in our s3 then add it, else exit
   const assets = await octokit.rest.repos.listReleaseAssets({ ownser, repo, release_id: release.id });
   console.log(assets);
