@@ -11,12 +11,30 @@ const releases = await octokit.rest.repos.listReleases({owner, repo});
 for(const release of releases.data) {
   // if the release version isn't currently in our s3 then add it, else exit
   const assets = await octokit.rest.repos.listReleaseAssets({ owner, repo, release_id: release.id });
-  console.log(assets);
+  console.log(assets.data.browser_download_url);
 
   // release.tag_name
 }
 
+// Release assets
+// data: [
+//   {
+//     url: 'https://api.github.com/repos/replicatedhq/kots/releases/assets/71689460',
+//     id: 71689460,
+//     node_id: 'RA_kwDOC9pON84EReT0',
+//     name: 'kotsadm-nominio.tar.gz',
+//     label: '',
+//     uploader: [Object],
+//     content_type: 'application/gzip',
+//     state: 'uploaded',
+//     size: 487758727,
+//     download_count: 0,
+//     created_at: '2022-07-15T16:05:00Z',
+//     updated_at: '2022-07-15T16:05:17Z',
+//     browser_download_url: 'https://github.com/replicatedhq/kots/releases/download/v1.76.1/kotsadm-nominio.tar.gz'
+//   },
 
+// Releases
 // data: [
 // {
 //   url: 'https://api.github.com/repos/replicatedhq/kots/releases/72105893',
