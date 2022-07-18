@@ -24,7 +24,7 @@ const releases = await octokit.rest.repos.listReleases({owner, repo});
 for(const release of releases.data) {
   // if the release version isn't currently in our s3 then add it, else exit
   const assets = await octokit.rest.repos.listReleaseAssets({ owner, repo, release_id: release.id });
-  console.log(assets.data.browser_download_url);
+  console.log(assets.data);
 
   // release.tag_name
 }
