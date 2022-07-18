@@ -1,0 +1,12 @@
+name: test
+
+on: push
+
+jobs:
+  regression-test-cleanup:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./test
+        with:
+          GITHUB_TOKEN: secrets.GITHUB_TOKEN
