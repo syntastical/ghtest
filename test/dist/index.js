@@ -14,6 +14,7 @@ __nccwpck_require__.r(__webpack_exports__);
 
 
 
+console.log((0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("GITHUB_TOKEN").length)
 const octokit = (0,_actions_github__WEBPACK_IMPORTED_MODULE_1__.getOctokit)((0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("GITHUB_TOKEN"));
 const releases = await octokit.rest.repos.listReleases({owner: "replicatedhq", repo: "kots"});
 console.log(releases);
