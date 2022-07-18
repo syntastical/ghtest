@@ -3,7 +3,7 @@ name: test
 on: push
 
 jobs:
-  regression-test-cleanup:
+  test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
