@@ -1,19 +1,29 @@
 import { getInput } from '@actions/core'
 import { getOctokit } from '@actions/github'
 
-const owner = "replicatedhq";
-const repo = "kots";
+const addons = [
+  {
+    owner: "replicatedhq",
+    repo: "kots"
+  }
+]
 
-console.log(getInput("GITHUB_TOKEN").length)
 const octokit = getOctokit(getInput("GITHUB_TOKEN"));
-const releases = await octokit.rest.repos.listReleases({owner, repo});
 
-for(const release of releases.data) {
-  // if the release version isn't currently in our s3 then add it, else exit
-  const assets = await octokit.rest.repos.listReleaseAssets({ owner, repo, release_id: release.id });
-  console.log(assets.data[0].browser_download_url);
+for(const {owner, repo} of addons) {
+  const releases = await octokit.rest.repos.listReleases({owner, repo});
+  for (const release of releases.data) {
+    // if the release version isn't currently in our s3 then add it, else exit
+    const releaseAssets = await octokit.rest.repos.listReleaseAssets({owner, repo, release_id: release.id});
 
-  // release.tag_name
+    for (const releaseAsset of releaseAssets) {
+      if (releaseAsset.name === "kurl-installer.tar.sh") {
+        // download the kUrl installer, test, and add the new version to the kUrl S3
+        // releaseAsset.browser_download_url
+        // release.tag_name
+      }
+    }
+  }
 }
 
 // Release assets
