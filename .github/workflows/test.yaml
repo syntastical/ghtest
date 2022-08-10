@@ -12,7 +12,7 @@ on:
       - created
 
 env:
-  addon_version: ${{ inputs.addon_version | github.ref_name }}
+  addon_version: ${{ inputs.addon_version || github.ref_name }}
 
 jobs:
   test:
