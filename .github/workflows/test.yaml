@@ -1,13 +1,21 @@
 name: test
 
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+      addon_version:
+        type: string
+        description: "Addon version without 'v' prefix."
+        required: true
+  release:
+    types:
+      - created
+
+env:
+  addon_version: ${{ inputs.addon_version | github.ref_name }}
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - run: aws help
-#      - uses: actions/checkout@v2
-#      - uses: ./test
-#        with:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo $addon_version
